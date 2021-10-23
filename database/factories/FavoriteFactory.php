@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Article;
+use App\Models\Favorite;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ArticleFactory extends Factory
+class FavoriteFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Article::class;
+    protected $model = Favorite::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,7 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->name(),
-            'price'=>random_int(0, 10000),
-            'entity'=>0,
-            
+            //
         ];
     }
 }
