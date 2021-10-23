@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ArticleController extends Controller
 {
@@ -13,8 +15,10 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        
+        return response([
+            'Data'=>ArticleResource::collection(Article::all())
+        ]);
     }
 
     /**
@@ -46,7 +50,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return response([
+            'Data'=>$article::get()
+        ]);
     }
 
     /**
