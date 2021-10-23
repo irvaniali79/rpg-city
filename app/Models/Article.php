@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
+    
+    protected $fillable=[
+        'id' ,
+        'name' ,
+        'entity',
+        'price',
+        'basket',
+        'favorite',
+        'created_at' ,
+        'updated_at' ,
+    ];
+    function baskets() {
+        return $this->belongsToMany(Basket::class);
+    }
+    
 }
