@@ -4,17 +4,20 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Models\User;
 
-class ExampleTest extends TestCase
+class RoutesTest extends TestCase
 {
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function test_example()
+    public function test_article_index()
     {
-        $response = $this->get('/');
+        auth()->login(User::find(1));
+        
+        $response = $this->get('/api/index');
 
         $response->assertStatus(200);
     }
