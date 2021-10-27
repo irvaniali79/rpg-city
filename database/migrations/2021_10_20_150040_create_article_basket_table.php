@@ -17,6 +17,7 @@ class CreateArticleBasketTable extends Migration
             $table->id();
             $table->foreignId('article_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('basket_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->integer('amount')->default(1);
             $table->timestamps();
         });
     }
