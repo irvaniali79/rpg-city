@@ -49,4 +49,7 @@ class User extends Authenticatable
     function favorite() {
         return $this->hasOne(Favorite::class);
     }
+    function bills() {
+        return $this->hasMany(Bill::class);
+    }
 }
