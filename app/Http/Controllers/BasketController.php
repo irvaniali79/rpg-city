@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use Illuminate\Http\Request;
+use App\Http\Resources\BasketResource;
 
 class BasketController extends Controller
 {
@@ -14,7 +15,10 @@ class BasketController extends Controller
      */
     public function index()
     {
-        //
+        return response([
+            'Data'=>BasketResource::collection(auth()->user()->basket->articles()->withPivot('amount')->get())
+            
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class BasketController extends Controller
      */
     public function create()
     {
-        //
+       //
     }
 
     /**
