@@ -9,8 +9,10 @@ use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use phpDocumentor\Reflection\PseudoTypes\True_;
+use App\Http\Controllers\BasketController;
+use App\Http\Controllers\BillController;
 
-class ArticleResourceTest extends TestCase
+class ResponseTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -19,9 +21,9 @@ class ArticleResourceTest extends TestCase
      */
     
     function test_login() {
-                
+        
         Auth()->login(User::find(1));
-
+        
         $this->assertTrue(true);
         
         
@@ -29,10 +31,7 @@ class ArticleResourceTest extends TestCase
     }
     
     
-    
-    
-    
-    public function test_resource()
+    public function test_resource_article_index()
     {
         auth()->login(User::find(1));
         
@@ -40,7 +39,7 @@ class ArticleResourceTest extends TestCase
         $response=$articlecontroller->index();
         $response=json_decode($response->content())->Data;
         
-        $this->assertIsArray($response);
+      
         $flag1=false;
         $flag12=false;
         
@@ -69,5 +68,43 @@ class ArticleResourceTest extends TestCase
         if(!$flag2)$this->assertTrue(false);
        
       
+    }
+    
+    
+    public function test_resource_basket_index(){
+        
+        auth()->login(User::find(1));
+        
+        $basketController=new BasketController();
+        $response=$basketController->index();
+        $response=json_decode($response->content())->Data;
+        
+
+        foreach ($response as $item){
+            
+     
+            $this->assertArrayHasKey('amount',(array)$item);
+            
+        }
+        
+        
+    }
+    public function test_response_bill_index(){
+        
+        
+        $BillController=new BillController();
+        $response=$BillController->index();
+        $response=json_decode($response->content())->Data;
+        
+        
+
+        foreach ($response as $item){
+            
+            print_r($item);
+            $this->assertArrayHasKey('user',(array)$item);
+            
+        }
+        
+        
     }
 }
