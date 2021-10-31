@@ -22,5 +22,7 @@ class Article extends Model
     function baskets() {
         return $this->belongsToMany(Basket::class);
     }
-    
+    function categories(){
+        return $this->belongsToMany(Category::class,'article_category','article_id','category_id');
+    }
 }

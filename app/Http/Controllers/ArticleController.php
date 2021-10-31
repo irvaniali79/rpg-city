@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Requests\StoreArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -22,24 +23,26 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        //
+        
+        $article=new Article($request->article);         
+        $article->categories()->createMany($request->categories);  
+        return response([
+            'Data'=>[
+                $article,
+                'type'=>$article->categories->where('label','type')->get('name'),
+                'level'=>$article->categories->where('label','level')->get('name'),
+                'time'=>$article->categories->where('label','time')->get('name'),
+                'lang'=>$article->categories->where('label','lang')->get('name'),
+                'multiplayer'=> $article->categories->where('label','multiplayer')->get('name')
+            ]
+        ]);
     }
 
     /**
@@ -50,8 +53,16 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        
         return response([
-            'Data'=>$article::get()
+            'Data'=>[
+                $article,
+                'type'=>$article->categories->where('label','type')->get('name'),
+                'level'=>$article->categories->where('label','level')->get('name'),
+                'time'=>$article->categories->where('label','time')->get('name'),
+                'lang'=>$article->categories->where('label','lang')->get('name'),
+                'multiplayer'=> $article->categories->where('label','multiplayer')->get('name')
+            ]
         ]);
     }
 
