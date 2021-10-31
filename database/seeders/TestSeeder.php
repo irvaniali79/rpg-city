@@ -9,8 +9,9 @@ use App\Models\Article;
 use App\Models\Basket;
 use App\Models\Favorite;
 use App\Models\Bill;
+use App\Models\Category;
 
-class UserSeeder extends Seeder
+class TestSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,7 +25,7 @@ class UserSeeder extends Seeder
         ->has(Favorite::factory(1)->has(Article::factory(5)))->
        has(Bill::factory(3)->has(Basket::factory(1)))->create();
        
-        
+        Article::factory(5)->hasCategories(5)->create(); 
 
         
       
