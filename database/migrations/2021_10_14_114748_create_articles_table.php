@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
             $table->id();
             
             $table->string('name');
-            $table->integer('entity');
+            $table->integer('entity')->default(1);
             $table->float('price');
 
             $table->timestamps();
