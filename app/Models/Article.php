@@ -25,4 +25,7 @@ class Article extends Model
     function categories(){
         return $this->belongsToMany(Category::class,'article_category','article_id','category_id');
     }
+    function media() {
+        return $this->hasMany(Media::class);   
+    }
 }
