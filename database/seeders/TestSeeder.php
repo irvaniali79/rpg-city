@@ -10,6 +10,7 @@ use App\Models\Basket;
 use App\Models\Favorite;
 use App\Models\Bill;
 use App\Models\Category;
+use App\Models\Comment;
 
 class TestSeeder extends Seeder
 {
@@ -25,7 +26,7 @@ class TestSeeder extends Seeder
         ->has(Favorite::factory(1)->has(Article::factory(5)))->
        has(Bill::factory(3)->has(Basket::factory(1)))->create();
        
-        Article::factory(5)->hasCategories(5)->create(); 
+       Article::factory(5)->hasCategories(5)->hasComments(5)->create(); 
 
         
       
