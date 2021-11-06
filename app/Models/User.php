@@ -52,4 +52,7 @@ class User extends Authenticatable
     function bills() {
         return $this->hasMany(Bill::class);
     }
+    function addresses() {
+        return $this->hasMany(Address::class);
+    }
 }

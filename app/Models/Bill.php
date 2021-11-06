@@ -15,4 +15,7 @@ class Bill extends Model
     function basket(){
         return $this->hasOne(Basket::class);
     }
+    function address() {
+        return $this->hasOne(Address::class);
+    }
 }
