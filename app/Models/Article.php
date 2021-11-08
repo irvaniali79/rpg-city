@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Casts\Jalali;
 
-class Article extends Model
+class Article extends JalaliDate
 {
     use HasFactory;
+ 
     
     protected $fillable=[
         'id' ,
@@ -19,6 +21,7 @@ class Article extends Model
         'created_at' ,
         'updated_at' ,
     ];
+    
     function baskets() {
         return $this->belongsToMany(Basket::class);
     }
