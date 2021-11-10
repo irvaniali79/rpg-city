@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Casts\Jalali;
+use Laravel\Scout\Searchable;
 
 class Article extends JalaliDate
 {
-    use HasFactory;
+    use HasFactory,Searchable;
  
     
     protected $fillable=[
@@ -16,22 +17,29 @@ class Article extends JalaliDate
         'name' ,
         'entity',
         'price',
-        'basket',
-        'favorite',
         'created_at' ,
         'updated_at' ,
     ];
     
-    function baskets() {
+
+    
+    public function searchablesAs(){
+        return 'articles';
+    }
+    
+    public function baskets() {
         return $this->belongsToMany(Basket::class);
     }
-    function categories(){
+    
+    public function categories(){
         return $this->belongsToMany(Category::class,'article_category','article_id','category_id');
     }
-    function comments(){
+    
+    public function comments(){
         return $this->hasMany(Comment::class);
     }
-    function media() {
+    
+    public function media() {
         return $this->hasMany(Media::class);   
     }
 }
