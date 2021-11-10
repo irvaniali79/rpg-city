@@ -20,7 +20,8 @@ class Jalali implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
-        return Jalalian::fromDateTime( $value);;
+       
+        return Jalalian::fromDateTime($value)->toString();
     }
     
     /**

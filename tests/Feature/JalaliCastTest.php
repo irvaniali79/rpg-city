@@ -22,15 +22,14 @@ class JalaliCastTest extends TestCase
     {
 
         $article= Article::find(1);
-        $this->assertInstanceOf(Jalalian::class,$article->created_at);
-       
+        $this->assertEquals($article->created_at,$article->created_at);
     }
     
     public function test_set()
     {
         $article= Article::find(1);
         $article->created_at=Carbon::now();
-        $this->assertEquals(Jalalian::now(), $article->created_at);
+        $this->assertEquals(Jalalian::now()->toString(), $article->created_at);
 
         
     }
