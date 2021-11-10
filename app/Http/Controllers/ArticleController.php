@@ -7,9 +7,13 @@ use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\StoreArticleRequest;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
 
 class ArticleController extends Controller
 {
+    use RefreshDatabase;
     /**
      * Display a listing of the resource.
      *
@@ -28,14 +32,28 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreArticleRequest $request)
+    public function store(Request $request)
     {
+        $article=new Article();
+        $article=$article->create($request->article);
+
+       
+       
+        foreach ($request->media as $file){
+            $path = $file->storePublicly('images');
+            
+            $article->media()->create(['path'=>$path]);
         
-        $article=new Article($request->article);         
+        }
+        
         $article->categories()->createMany($request->categories);  
+        
         return response([
             'Data'=>[
                 $article,
+                'media'=>[
+                    $article->media
+                ],
                 'type'=>$article->categories->where('label','type')->get('name'),
                 'level'=>$article->categories->where('label','level')->get('name'),
                 'time'=>$article->categories->where('label','time')->get('name'),
