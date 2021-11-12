@@ -6,6 +6,10 @@ use App\Models\Bill;
 use Illuminate\Http\Request;
 use App\Models\Basket;
 use App\Models\Address;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
+use function GuzzleHttp\Promise\all;
 
 class BillController extends Controller
 {
@@ -54,13 +58,16 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        $user=auth()->login($request->user_id);
+        Auth::login(User::find($request->user_id));
+        
         $basket=Basket::find($request->basket_id);
         $address=Address::find($request->address_id);
         
-        $bill=$user->bill()->create();
-        $bill->basket()->create($basket);
-        $bill->address()->create($address);
+        $bill=auth()->user()->bills()->create();
+        $bill->basket()->create((new Collection($basket))->except(['id','bill_id','created_at','updated_at','user_id'])
+            ->all());
+            
+        $bill->address()->create((new Collection($address))->except(['id','created_at','updated_at','bill_id'])->all());
         
         $basket->delete();
         

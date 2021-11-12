@@ -10,6 +10,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Requests\StoreArticleRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Testing\File;
+use App\Http\Controllers\BillController;
+use Illuminate\Http\Request;
 
 class RequestTest extends TestCase
 {
@@ -18,8 +20,9 @@ class RequestTest extends TestCase
      *
      * @return void
      */
-
-    public function test_article_create() {
+//     use RefreshDatabase;
+    
+    public function test_article_store() {
         
         auth()->login(User::find(1));
        
@@ -62,5 +65,16 @@ class RequestTest extends TestCase
         
         
         $this->assertTrue(true);
+    }
+    
+    public function test_bill_store(){
+        
+        $billcontroller=new BillController();
+        $response=$billcontroller->
+        store(new Request(['article_id'=>2,'basket_id'=>3,'user_id'=>2,'address_id'=>2]));
+
+        $this->assertEquals($response->status(),200);
+        
+        
     }
 }

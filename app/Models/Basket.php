@@ -9,6 +9,13 @@ class Basket extends Model
 {
     use HasFactory;
     
+    protected $fillable=[
+        'id',
+        'created_at',
+        'updated_at',
+        'user_id'
+    ];
+    
     
     function articles() {
         return $this->belongsToMany(Article::class);
