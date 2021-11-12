@@ -27,7 +27,9 @@ class CreateAddressesTable extends Migration
             
             $table->enum('status', ['default','none'])->default('default');
             
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('bill_id')->nullable()->constrained();
+            
             $table->timestamps();
         });
     }
