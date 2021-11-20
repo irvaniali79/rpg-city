@@ -11,8 +11,7 @@
 @endif
 
 <div>
-    @php
-        $comments = $comments->sortBy('created_at');
+    @php        $comments = $comments->sortBy('created_at');
 
         if (isset($perPage)) {
             $page = request()->query('page', 1) - 1;
