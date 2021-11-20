@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Casts\Jalali;
 use Laravel\Scout\Searchable;
+use Laravelista\Comments\Commentable;
 
 class Article extends JalaliDate
 {
-    use HasFactory,Searchable;
+    use HasFactory,Searchable,Commentable;
  
     
     protected $fillable=[
@@ -35,9 +36,7 @@ class Article extends JalaliDate
         return $this->belongsToMany(Category::class,'article_category','article_id','category_id');
     }
     
-    public function comments(){
-        return $this->hasMany(Comment::class);
-    }
+
     
     public function media() {
         return $this->hasMany(Media::class);   
