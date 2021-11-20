@@ -26,7 +26,7 @@ class TestSeeder extends Seeder
         ->has(Favorite::factory(1)->has(Article::factory(5)))->
        has(Bill::factory(3)->has(Basket::factory(1)))->hasAddresses(1)->create();
        
-       Article::factory(5)->hasCategories(5)->hasComments(5)->create(); 
+       Article::factory(5)->hasCategories(5)->create(); 
 
         
       
