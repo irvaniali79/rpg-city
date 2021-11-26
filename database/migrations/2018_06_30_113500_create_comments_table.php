@@ -29,8 +29,8 @@ class CreateCommentsTable extends Migration
 
             $table->text('comment');
             $table->boolean('status')->default(false);
-            $table->array('advantages')->nullable();
-            $table->array('disadvantages')->nullable();
+            $table->json('advantages')->nullable();
+            $table->json('disadvantages')->nullable();
             
             $table->boolean('approved')->default(true);
 

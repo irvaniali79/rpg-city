@@ -12,10 +12,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
-use Laravelista\Comments\CommentControllerInterface;
-use Laravelista\Comments\Comment;
+use App\Models\Comment;
 
-class CommentController extends Controller implements CommentControllerInterface
+class CommentController extends Controller 
 {
     public function __construct()
     {
@@ -136,8 +135,8 @@ class CommentController extends Controller implements CommentControllerInterface
         $reply->parent()->associate($comment);
         
         $reply->comment = $request->message;
-        $comment->advantages = $request->advantages;
-        $comment->disadvantages = $request->disadvantages;
+        $reply->advantages = $request->advantages;
+        $reply->disadvantages = $request->disadvantages;
         
         $reply->approved = !Config::get('comments.approval_required');
         $reply->save();

@@ -8,8 +8,9 @@ use Laravelista\Comments\Events\CommentUpdated;
 use Laravelista\Comments\Events\CommentDeleted;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
+use Laravelista\Comments\Comment as baseComment;
 
-class Comment extends Model
+class Comment extends baseComment
 {
     use SoftDeletes;
     
