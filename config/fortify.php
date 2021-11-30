@@ -118,7 +118,7 @@ return [
     |
     */
 
-    'views' => true,
+    'views' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -134,12 +134,12 @@ return [
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
-        /*Features::updatePasswords(),
+        Features::updatePasswords(),
         Features::emailVerification(),
         Features::updateProfileInformation(),
-         Features::twoFactorAuthentication([
-            'confirmPassword' => true,
-        ]), */
+//          Features::twoFactorAuthentication([
+//             'confirmPassword' => true,
+//         ]), 
     ],
 
 ];
