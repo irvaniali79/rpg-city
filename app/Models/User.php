@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravelista\Comments\Commenter;
+use Illuminate\Contracts\Validation\Rule;
 
 class User extends Authenticatable
 {
@@ -32,6 +33,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'role'
     ];
 
     /**
@@ -42,8 +44,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $with= [
+        'role'
+    ];
     
-    
+  
+  
+    function role(){
+        return $this->hasOne(Role::class);
+    }
     function basket() {
         return $this->hasOne(Basket::class);
     }
