@@ -26,18 +26,20 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request)
             {
+                $str='successful' ?auth()->user()??true?true:false : 'unsuccessful';
                 return response([
                     'Data'=>auth()->user(),
-                    'status'=>auth()->user()??true?true:false
+                    'status'=>$str
                 ],200);
             }
         });
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
             {
+                $str='successful' ?auth()->user()??true?true:false : 'unsuccessful';
                 return response([
                     'Data'=>auth()->user(),
-                    'status'=>auth()->user()??true?true:false
+                    'status'=>$str
                 ],200);
             }
         });
