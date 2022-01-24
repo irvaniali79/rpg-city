@@ -48,9 +48,9 @@ class User extends Authenticatable
     protected $with= [
         'role'
     ];
-    
-  
-  
+
+
+
     function role(){
         return $this->hasOne(Role::class);
     }

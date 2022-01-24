@@ -9,10 +9,16 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class Role extends Model
 {
     use HasFactory;
-    static public function boot()
-    {
-        JsonResource::withoutWrapping();
-    }
+    // static public function boot()
+    // {
+    //     JsonResource::withoutWrapping();
+    // }
     protected $visible = ['role'];
-    
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    protected $fillable=[
+        'role','id'
+    ];
 }
