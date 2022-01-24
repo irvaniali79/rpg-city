@@ -13,6 +13,8 @@ use Laravel\Fortify\Http\Controllers\RecoveryCodeController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 use App\Models\User;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,15 @@ use Illuminate\Support\Facades\Config;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::prefix('v1/')->group(function(){
+
+    Route::get('checklogin', function(){
+        return response();
+    });
+    Route::get('home',[HomeController::class,'index']);
+
+
+});
 
 
 
