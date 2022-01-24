@@ -9,9 +9,7 @@ use App\Models\Article;
 use App\Models\Basket;
 use App\Models\Favorite;
 use App\Models\Bill;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Role;
+use App\Models\Rolse;
 
 class TestSeeder extends Seeder
 {
@@ -22,14 +20,13 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-       
-       User::factory(5)->has(Basket::factory(1)->has(Article::factory(5)))
-        ->has(Favorite::factory(1)->has(Article::factory(5)))->
-       has(Bill::factory(3)->has(Basket::factory(1)))->hasAddresses(1)->has(Role::factory(1))->create();
-       
-       Article::factory(5)->hasCategories(5)->create(); 
 
-        
-      
+        User::factory(5)->has(Basket::factory(1)->has(Article::factory(5)))
+            ->has(Favorite::factory(1)->has(Article::factory(5)))->
+        has(Bill::factory(3)->has(Basket::factory(1)))->hasAddresses(1)->hasRole(1)->create();
+
+        Article::factory(5)->hasCategories(5)->create();
+
+
     }
 }
